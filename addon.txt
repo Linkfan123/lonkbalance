@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+	"name"				"lonkbalance"
+	"version"			"1"
+	"up_date"			"00/00/00"
+	"author_name"			"lonkchase"
+	"author_email"			"lonkrichard@gmail.com"
+	"author_url"			"wiki.darkrp.com"
+	"info"				"A rebalance of some of the vanila weapons"
+	"override"			"0"
+}
