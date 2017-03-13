@@ -54,6 +54,32 @@ function SWEP:Deploy()
    return true
 end
 
+function SWEP:SetZoom(state)
+   if CLIENT then return end
+   if not (IsValid(self.Owner) and self.Owner:IsPlayer()) then return end
+   if state then
+      self.Owner:SetFOV(35, 0.5)
+   else
+      self.Owner:SetFOV(0, 0.2)
+   end
+end
+
+-- Add some zoom to ironsights for this gun
+function SWEP:SecondaryAttack()
+   if not self.IronSightsPos then return end
+   if self:GetNextSecondaryFire() > CurTime() then return end
+
+   local bIronsights = not self:GetIronsights()
+
+   self:SetIronsights( bIronsights )
+
+   if SERVER then
+      self:SetZoom( bIronsights )
+   end
+
+   self:SetNextSecondaryFire( CurTime() + 0.3 )
+end
+
 -- The silenced pistol's headshot damage multiplier is based on distance. The further it
 -- is, the more damage it does. This gives players an extra bonus for engaging
 -- at long range. It isn't much, but it's something.
