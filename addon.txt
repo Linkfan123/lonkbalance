@@ -1,7 +1,7 @@
 "AddonInfo"
 {
 	"name"				"lonkbalance"
-	"version"			"1"
+	"version"			"0.1.0"
 	"up_date"			"00/00/00"
 	"author_name"			"lonkchase"
 	"author_email"			"lonkrichard@gmail.com"
