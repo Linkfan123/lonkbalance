@@ -1072,8 +1072,38 @@ L.aw_surt1_text = ", with {num} rounds of doing this, you'd think would ponder a
 L.aw_bdlki1_title = "Noobie Witness"
 L.aw_bdlki1_text = "likes to stick his nose into too many things and has been silenced {num} times. He still doesn't get it."
 
+L.aw_bdlki2_title = "Le Worst Witness"
+L.aw_bdlki2_text = "has seen everything but can't express it though, 'cause he tried {num} times and he hasn't been successful yet."
+
 L.aw_bdlkt1_title = "Noobie Agent"
 L.aw_bdlkt1_text = "was trying to be all righteous trying to end terrorism. Well, it hasn't worked the past {num} times, soooooo..."
+
+L.aw_bdlkt2_title = "Le Worst Agent"
+L.aw_bdlkt2_text = "is conducting an experiment on if trying killing a bunch of terrorists stops terrorism and doesn't get himself hurt. After {num} trials we've come up with a pretty solid conclusion but he hasn't yet."
+
+L.aw_dna1_title = "Deoxyribonucleic Assassination"
+L.aw_dna1_text = "used deoxyribonucleic acid to take away someone's weapon clearance. And living clearance."
+
+L.aw_dna2_title = "DetectiN' all dem Asses"
+L.aw_dna2_text = "utilized the new technology all these kids are using nowadays to track {num} murderers. I'd say that's pretty nuclear."
+
+L.aw_highhpb_title = "Basically Neo"
+L.aw_highhpb_text = "should have sunglasses and a trenchcoat because only Neo could have dodged that many bullets."
+
+L.aw_lowhpb_title = "'It's only a flesh wound...'"
+L.aw_lowhpb_text = "has practically 50 bullets shot into him and yet he managed to survive the round."
+
+L.aw_highhpc_title = "Fistfight"
+L.aw_highhpc_text = "had a bit too much to drink and got in a skirmish. Let's just say a lot of people were laying on the ground that night, but he wasn't one of them."
+
+L.aw_lowhpc_title = "Raw but still Edible"
+L.aw_lowhpc_text = "has been pulverised by everything you can swing at a man but yet he's still walking."
+
+L.aw_highhpe_title = "Blast Resistance"
+L.aw_highhpe_text = "was a little too close to the blast site but is still lookin' pretty fine."
+
+L.aw_lowhpe_title = "'It was explosive, dude!'"
+L.aw_lowhpe_text = "went to go see Rhapsody of Fire and got literally blown away. He was last seen slowly getting up off the ground in badly stinged clothes sticking his thumb out."
 
 
 --- New and modified pieces of text are placed below this point, marked with the
