@@ -1056,6 +1056,26 @@ L.aw_tod1_text  = "died only seconds before their team won the round."
 L.aw_tod2_title = "I Hate This Game"
 L.aw_tod2_text  = "died right after the start of the round."
 
+
+--- New and modified pieces of text are placed below this point, marked with the
+--- version in which they were added, to make updating translations easier.
+
+
+--- v23
+L.set_avoid_det     = "Avoid being selected as Detective"
+L.set_avoid_det_tip = "Enable this to ask the server not to select you as Detective if possible. Does not mean you are Traitor more often."
+
+--- v24
+L.drop_no_ammo = "Insufficient ammo in your weapon's clip to drop as an ammo box."
+
+--- v31
+L.set_cross_brightness = "Crosshair brightness"
+L.set_cross_size = "Crosshair size"
+
+--- 5-25-15
+L.hat_retrieve = "You picked up a Detective's hat."
+
+--- lonkbalance v0.1.0
 --These aren't actually coded in yet, but I felt like it shut up.
 L.aw_suri1_title = "Experienced Witness"
 L.aw_suri1_text = "managed to survive {num} rounds of traitorism without crouching down in a corner and crying to death."
@@ -1077,6 +1097,9 @@ L.aw_bdlki2_text = "has seen everything but can't express it though, 'cause he t
 
 L.aw_bdlkt1_title = "Noobie Agent"
 L.aw_bdlkt1_text = "was trying to be all righteous trying to end terrorism. Well, it hasn't worked the past {num} times, soooooo..."
+
+L.aw_glk1.title = "FKIN' GLOCKS"
+L.aw_glk1.text = "made Moe rage on Twitch when they killed {num} enemies with the water gun."
 
 L.aw_bdlkt2_title = "Le Worst Agent"
 L.aw_bdlkt2_text = "is conducting an experiment on if trying killing a bunch of terrorists stops terrorism and doesn't get himself hurt. After {num} trials we've come up with a pretty solid conclusion but he hasn't yet."
@@ -1105,21 +1128,5 @@ L.aw_highhpe_text = "was a little too close to the blast site but is still looki
 L.aw_lowhpe_title = "'It was explosive, dude!'"
 L.aw_lowhpe_text = "went to go see Rhapsody of Fire and got literally blown away. He was last seen slowly getting up off the ground in badly stinged clothes sticking his thumb out."
 
-
---- New and modified pieces of text are placed below this point, marked with the
---- version in which they were added, to make updating translations easier.
-
-
---- v23
-L.set_avoid_det     = "Avoid being selected as Detective"
-L.set_avoid_det_tip = "Enable this to ask the server not to select you as Detective if possible. Does not mean you are Traitor more often."
-
---- v24
-L.drop_no_ammo = "Insufficient ammo in your weapon's clip to drop as an ammo box."
-
---- v31
-L.set_cross_brightness = "Crosshair brightness"
-L.set_cross_size = "Crosshair size"
-
---- 5-25-15
-L.hat_retrieve = "You picked up a Detective's hat."
+L.aw_glk2.title = "Auto-Magic®"
+L.aw_glk2.text = ", with the new Glock 18, killed {num} of his friends in under 0.00000000001 nanoseconds, and you can too! 99.99% guaranteed!"
