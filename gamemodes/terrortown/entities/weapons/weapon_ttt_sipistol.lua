@@ -80,20 +80,6 @@ function SWEP:SecondaryAttack()
    self:SetNextSecondaryFire( CurTime() + 0.3 )
 end
 
--- The silenced pistol's headshot damage multiplier is based on distance. The further it
--- is, the more damage it does. This gives players an extra bonus for engaging
--- at long range. It isn't much, but it's something.
-function SWEP:GetHeadshotMultiplier(victim, dmginfo)
-   local att = dmginfo:GetAttacker()
-   if not IsValid(att) then return 3 end
-
-   local dist = victim:GetPos():Distance(att:GetPos())
-   local d = math.max(0, dist - 140)
-
-   -- grow from 1 to 2 slowly as distance increases
-   return 1 + math.max(0, (0 + 0.002 * (d ^ 1.5)))
-end
-
 -- We were bought as special equipment, and we have an extra to give
 function SWEP:WasBought(buyer)
    if IsValid(buyer) then -- probably already self.Owner
