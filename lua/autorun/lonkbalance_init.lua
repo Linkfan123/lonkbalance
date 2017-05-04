@@ -40,6 +40,8 @@ function LB.createDelayedTimer(timerName, initialDelay, repeatTime, timesToRepea
     )
 end
 if CLIENT then
+  include("ddd/main/misc/sh_inheritsfrom.lua")
+  include("ddd/main/misc/sh_delayedtimer.lua")
   LB.createDelayedTimer("LBBuletin", 15, 3600, 0, function()
     local red = Color(255, 0, 0, 255)
     local yellow = Color(255, 255, 0, 255)
