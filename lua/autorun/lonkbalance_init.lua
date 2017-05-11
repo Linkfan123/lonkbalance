@@ -43,7 +43,9 @@ if CLIENT then
   LB.createDelayedTimer("LBBuletin", 15, 3600, 0, function()
     local red = Color(255, 0, 0, 255)
     local yellow = Color(255, 255, 0, 255)
-    chat.AddText(red, "This server is running lonkbalanse " .. LB.version .. ".")
-    chat.AddText(red, "LB is in beta. If you think something should be added, message me on GitHub.")
+    local green = Color(0, 255, 0, 0)
+    chat.AddText(yellow, "This server is running lonkbalance " .. LB.version .. ".")
+    chat.AddText(red, "THE VANILA WEAPONS WILL NOT WORK LIKE YOU'RE USED TO. THEY HAVE BEEN EDITED FOR BETTER BALANCING.")
+    chat.AddText(yellow, "LB is in beta. If you think something should be added, message me on GitHub.")
   end)
 end
