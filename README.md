@@ -1,4 +1,9 @@
-# lonkbalance
+# lonkbalance - New Weapons Branch
+
+This branch adds some newish weapons and makes more major changes to vanilla weapons. Use this branch if you want to live on the edge.
+
+## Orig. README
+
 Vanilla TTT has some balance issues. The Shotgun is pretty good at medium ranges for some reason, and some T-weapons aren't that useful.
 
 This mod tries to fix that.
