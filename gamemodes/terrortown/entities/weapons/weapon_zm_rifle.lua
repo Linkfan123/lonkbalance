@@ -1,67 +1,64 @@
 AddCSLuaFile()
 
-SWEP.HoldType              = "pistol"
+SWEP.HoldType              = "ar2"
 
 if CLIENT then
-   SWEP.PrintName          = "sipistol_name"
-   SWEP.Slot               = 6
+   SWEP.PrintName          = "rifle_name"
+   SWEP.Slot               = 2
 
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
 
-   SWEP.EquipMenuData = {
-      type = "item_weapon",
-      desc = "sipistol_desc"
-   };
-
-   SWEP.Icon               = "vgui/ttt/icon_silenced"
-   SWEP.IconLetter         = "a"
+   SWEP.Icon               = "vgui/ttt/icon_scout"
+   SWEP.IconLetter         = "n"
 end
 
 SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Primary.Recoil        = 1.2
-SWEP.Primary.Damage        = 40
-SWEP.Primary.Delay         = 0.38
-SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 15
+SWEP.Kind                  = WEAPON_HEAVY
+SWEP.WeaponID              = AMMO_RIFLE
+
+SWEP.Primary.Delay         = 1.5
+SWEP.Primary.Recoil        = 7
 SWEP.Primary.Automatic     = true
-SWEP.Primary.DefaultClip   = 15
-SWEP.Primary.ClipMax       = 45
-SWEP.Primary.Ammo          = "Pistol"
-SWEP.Primary.Sound         = Sound( "Weapon_USP.SilencedShot" )
-SWEP.Primary.SoundLevel    = 50
+SWEP.Primary.Ammo          = "357"
+SWEP.Primary.Damage        = 50
+SWEP.Primary.Cone          = 0
+SWEP.Primary.ClipSize      = 10
+SWEP.Primary.ClipMax       = 20 -- keep mirrored to ammo
+SWEP.Primary.DefaultClip   = 10
+SWEP.Primary.Sound         = Sound("Weapon_Scout.Single")
 
-SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
-SWEP.WeaponID              = AMMO_SIPISTOL
+SWEP.Secondary.Sound       = Sound("Default.Zoom")
 
-SWEP.AmmoEnt               = "item_ammo_pistol_ttt"
-SWEP.IsSilent              = true
+SWEP.HeadshotMultiplier    = 4
+
+SWEP.AutoSpawnable         = true
+SWEP.Spawnable             = true
+SWEP.AmmoEnt               = "item_ammo_357_ttt"
 
 SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/cstrike/c_pist_usp.mdl"
-SWEP.WorldModel            = "models/weapons/w_pist_usp_silencer.mdl"
+SWEP.ViewModel             = Model("models/weapons/cstrike/c_snip_scout.mdl")
+SWEP.WorldModel            = Model("models/weapons/w_snip_scout.mdl")
 
-SWEP.IronSightsPos         = Vector( -5.91, -4, 2.84 )
-SWEP.IronSightsAng         = Vector(-0.5, 0, 0)
-
-SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
-SWEP.ReloadAnim            = ACT_VM_RELOAD_SILENCED
-
-function SWEP:Deploy()
-   self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
-   return true
-end
+SWEP.IronSightsPos         = Vector( 5, -15, -2 )
+SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
 
 function SWEP:SetZoom(state)
-   if CLIENT then return end
-   if not (IsValid(self.Owner) and self.Owner:IsPlayer()) then return end
-   if state then
-      self.Owner:SetFOV(35, 0.5)
-   else
-      self.Owner:SetFOV(0, 0.2)
+   if CLIENT then
+      return
+   elseif IsValid(self.Owner) and self.Owner:IsPlayer() then
+      if state then
+         self.Owner:SetFOV(20, 0.3)
+      else
+         self.Owner:SetFOV(0, 0.2)
+      end
    end
+end
+
+function SWEP:PrimaryAttack( worldsnd )
+   self.BaseClass.PrimaryAttack( self.Weapon, worldsnd )
+   self:SetNextSecondaryFire( CurTime() + 0.1 )
 end
 
 -- Add some zoom to ironsights for this gun
@@ -74,10 +71,12 @@ function SWEP:SecondaryAttack()
    self:SetIronsights( bIronsights )
 
    if SERVER then
-      self:SetZoom( bIronsights )
+      self:SetZoom(bIronsights)
+   else
+      self:EmitSound(self.Secondary.Sound)
    end
 
-   self:SetNextSecondaryFire( CurTime() + 0.3 )
+   self:SetNextSecondaryFire( CurTime() + 0.3)
 end
 
 function SWEP:PreDrop()
@@ -154,12 +153,5 @@ if CLIENT then
 
    function SWEP:AdjustMouseSensitivity()
       return (self:GetIronsights() and 0.2) or nil
-   end
-end
-
--- We were bought as special equipment, and we have an extra to give
-function SWEP:WasBought(buyer)
-   if IsValid(buyer) then -- probably already self.Owner
-      buyer:GiveAmmo( 15, "Pistol" )
    end
 end
