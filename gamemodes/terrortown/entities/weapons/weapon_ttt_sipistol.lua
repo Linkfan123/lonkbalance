@@ -24,10 +24,10 @@ SWEP.Primary.Recoil        = 1
 SWEP.Primary.Damage        = 29
 SWEP.Primary.Delay         = 0.38
 SWEP.Primary.Cone          = 0.002
-SWEP.Primary.ClipSize      = 10
-SWEP.Primary.Automatic     = false
-SWEP.Primary.DefaultClip   = 10
-SWEP.Primary.ClipMax       = 30
+SWEP.Primary.ClipSize      = 20
+SWEP.Primary.Automatic     = true
+SWEP.Primary.DefaultClip   = 20
+SWEP.Primary.ClipMax       = 60
 SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = Sound( "Weapon_USP.SilencedShot" )
 SWEP.Primary.SoundLevel    = 50
@@ -78,20 +78,6 @@ function SWEP:SecondaryAttack()
    end
 
    self:SetNextSecondaryFire( CurTime() + 0.3 )
-end
-
--- The silenced pistol's headshot damage multiplier is based on distance. The further it
--- is, the more damage it does. This reinforces the silenced pistol's role as long
--- range alternative to the rifle by reducing effectiveness at mid- to short-range.
-function SWEP:GetHeadshotMultiplier(victim, dmginfo)
-   local att = dmginfo:GetAttacker()
-   if not IsValid(att) then return 2.7 end
-
-   local dist = victim:GetPos():Distance(att:GetPos())
-   local d = math.max(0, dist - 140)
-	
-   -- build from 1 to 3 slowly as distance increases
-   return 1 + math.min(2, (0.002 * (d ^ 1)))
 end
 
 -- We were bought as special equipment, and we have an extra to give

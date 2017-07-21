@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-SWEP.HoldType            = "revolver"
+SWEP.HoldType            = "smg"
 
 if CLIENT then
    SWEP.PrintName        = "MAC10"

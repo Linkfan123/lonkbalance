@@ -20,15 +20,15 @@ SWEP.WeaponID              = AMMO_SHOTGUN
 
 SWEP.Primary.Ammo          = "Buckshot"
 SWEP.Primary.Damage        = 9
-SWEP.Primary.Cone          = 0.1
-SWEP.Primary.Delay         = 1.1
+SWEP.Primary.Cone          = 0.085
+SWEP.Primary.Delay         = 1
 SWEP.Primary.ClipSize      = 8
-SWEP.Primary.ClipMax       = 16
+SWEP.Primary.ClipMax       = 24
 SWEP.Primary.DefaultClip   = 8
 SWEP.Primary.Automatic     = true
-SWEP.Primary.NumShots      = 6
+SWEP.Primary.NumShots      = 8
 SWEP.Primary.Sound         = Sound( "Weapon_XM1014.Single" )
-SWEP.Primary.Recoil        = 8
+SWEP.Primary.Recoil        = 7
 
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
@@ -47,6 +47,29 @@ function SWEP:SetupDataTables()
    self:DTVar("Bool", 0, "reloading")
 
    return self.BaseClass.SetupDataTables(self)
+end
+
+function SWEP:PrimaryAttack(worldsnd)
+
+   self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
+   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+
+   if not self:CanPrimaryAttack() then return end
+
+   if not worldsnd then
+      self:EmitSound( self.Primary.Sound, self.Primary.SoundLevel )
+   elseif SERVER then
+      sound.Play(self.Primary.Sound, self:GetPos(), self.Primary.SoundLevel)
+   end
+
+   self:ShootBullet( self.Primary.Damage, self.Primary.Recoil, self.Primary.NumShots, self:GetPrimaryCone() )
+
+   self:TakePrimaryAmmo( 1 )
+
+   local owner = self.Owner
+   if not IsValid(owner) or owner:IsNPC() or (not owner.ViewPunch) then return end
+
+   owner:ViewPunch( Angle( math.Rand(-0.5,-0.4) * self.Primary.Recoil, math.Rand(-0.4,0.4) * self.Primary.Recoil, 0 ) )
 end
 
 function SWEP:Reload()
