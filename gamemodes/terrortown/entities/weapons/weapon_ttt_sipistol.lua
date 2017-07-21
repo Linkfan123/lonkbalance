@@ -20,14 +20,14 @@ end
 
 SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Primary.Recoil        = 1.2
-SWEP.Primary.Damage        = 40
+SWEP.Primary.Recoil        = 1
+SWEP.Primary.Damage        = 29
 SWEP.Primary.Delay         = 0.38
-SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 15
-SWEP.Primary.Automatic     = true
-SWEP.Primary.DefaultClip   = 15
-SWEP.Primary.ClipMax       = 45
+SWEP.Primary.Cone          = 0.002
+SWEP.Primary.ClipSize      = 10
+SWEP.Primary.Automatic     = false
+SWEP.Primary.DefaultClip   = 10
+SWEP.Primary.ClipMax       = 30
 SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = Sound( "Weapon_USP.SilencedShot" )
 SWEP.Primary.SoundLevel    = 50
@@ -58,7 +58,7 @@ function SWEP:SetZoom(state)
    if CLIENT then return end
    if not (IsValid(self.Owner) and self.Owner:IsPlayer()) then return end
    if state then
-      self.Owner:SetFOV(35, 0.5)
+      self.Owner:SetFOV(50, 0.5)
    else
       self.Owner:SetFOV(0, 0.2)
    end
@@ -80,86 +80,23 @@ function SWEP:SecondaryAttack()
    self:SetNextSecondaryFire( CurTime() + 0.3 )
 end
 
-function SWEP:PreDrop()
-   self:SetZoom(false)
-   self:SetIronsights(false)
-   return self.BaseClass.PreDrop(self)
-end
+-- The silenced pistol's headshot damage multiplier is based on distance. The further it
+-- is, the more damage it does. This reinforces the silenced pistol's role as long
+-- range alternative to the rifle by reducing effectiveness at mid- to short-range.
+function SWEP:GetHeadshotMultiplier(victim, dmginfo)
+   local att = dmginfo:GetAttacker()
+   if not IsValid(att) then return 2.7 end
 
-function SWEP:Reload()
-	if ( self:Clip1() == self.Primary.ClipSize or self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0 ) then return end
-   self:DefaultReload( ACT_VM_RELOAD )
-   self:SetIronsights( false )
-   self:SetZoom( false )
-end
-
-
-function SWEP:Holster()
-   self:SetIronsights(false)
-   self:SetZoom(false)
-   return true
-end
-
-if CLIENT then
-   local scope = surface.GetTextureID("sprites/scope")
-   function SWEP:DrawHUD()
-      if self:GetIronsights() then
-         surface.SetDrawColor( 0, 0, 0, 255 )
-         
-         local scrW = ScrW()
-         local scrH = ScrH()
-
-         local x = scrW / 2.0
-         local y = scrH / 2.0
-         local scope_size = scrH
-
-         -- crosshair
-         local gap = 80
-         local length = scope_size
-         surface.DrawLine( x - length, y, x - gap, y )
-         surface.DrawLine( x + length, y, x + gap, y )
-         surface.DrawLine( x, y - length, x, y - gap )
-         surface.DrawLine( x, y + length, x, y + gap )
-
-         gap = 0
-         length = 50
-         surface.DrawLine( x - length, y, x - gap, y )
-         surface.DrawLine( x + length, y, x + gap, y )
-         surface.DrawLine( x, y - length, x, y - gap )
-         surface.DrawLine( x, y + length, x, y + gap )
-
-
-         -- cover edges
-         local sh = scope_size / 2
-         local w = (x - sh) + 2
-         surface.DrawRect(0, 0, w, scope_size)
-         surface.DrawRect(x + sh - 2, 0, w, scope_size)
-         
-         -- cover gaps on top and bottom of screen
-         surface.DrawLine( 0, 0, scrW, 0 )
-         surface.DrawLine( 0, scrH - 1, scrW, scrH - 1 )
-
-         surface.SetDrawColor(255, 0, 0, 255)
-         surface.DrawLine(x, y, x + 1, y + 1)
-
-         -- scope
-         surface.SetTexture(scope)
-         surface.SetDrawColor(255, 255, 255, 255)
-
-         surface.DrawTexturedRectRotated(x, y, scope_size, scope_size, 0)
-      else
-         return self.BaseClass.DrawHUD(self)
-      end
-   end
-
-   function SWEP:AdjustMouseSensitivity()
-      return (self:GetIronsights() and 0.2) or nil
-   end
+   local dist = victim:GetPos():Distance(att:GetPos())
+   local d = math.max(0, dist - 140)
+	
+   -- build from 1 to 3 slowly as distance increases
+   return 1 + math.min(2, (0.002 * (d ^ 1)))
 end
 
 -- We were bought as special equipment, and we have an extra to give
 function SWEP:WasBought(buyer)
    if IsValid(buyer) then -- probably already self.Owner
-      buyer:GiveAmmo( 15, "Pistol" )
+      buyer:GiveAmmo( 10, "Pistol" )
    end
 end

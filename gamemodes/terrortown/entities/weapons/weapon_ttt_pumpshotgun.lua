@@ -3,8 +3,8 @@ AddCSLuaFile()
 SWEP.HoldType              = "shotgun"
 
 if CLIENT then
-   SWEP.PrintName          = "shotgun_name"
-   SWEP.Slot               = 2
+   SWEP.PrintName          = "pumpshotgun_name"
+   SWEP.Slot               = 7
 
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
@@ -15,33 +15,44 @@ end
 
 SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Kind                  = WEAPON_HEAVY
-SWEP.WeaponID              = AMMO_SHOTGUN
+SWEP.Kind                  = WEAPON_EQUIP1
 
 SWEP.Primary.Ammo          = "Buckshot"
-SWEP.Primary.Damage        = 9
-SWEP.Primary.Cone          = 0.1
-SWEP.Primary.Delay         = 1.1
-SWEP.Primary.ClipSize      = 8
-SWEP.Primary.ClipMax       = 16
-SWEP.Primary.DefaultClip   = 8
-SWEP.Primary.Automatic     = true
+SWEP.Primary.Damage        = 20
+SWEP.Primary.Cone          = 0.2
+SWEP.Primary.Delay         = 1.5
+SWEP.Primary.ClipSize      = 6
+SWEP.Primary.ClipMax       = 18
+SWEP.Primary.DefaultClip   = 6
+SWEP.Primary.Automatic     = false
 SWEP.Primary.NumShots      = 6
-SWEP.Primary.Sound         = Sound( "Weapon_XM1014.Single" )
-SWEP.Primary.Recoil        = 8
+SWEP.Primary.Sound         = Sound( "Weapon_M3.Single" )
+SWEP.Primary.Recoil        = 10
 
-SWEP.AutoSpawnable         = true
+SWEP.NoSights			   = true
+
+SWEP.AutoSpawnable         = false
 SWEP.Spawnable             = true
 SWEP.AmmoEnt               = "item_box_buckshot_ttt"
 
 SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/cstrike/c_shot_xm1014.mdl"
-SWEP.WorldModel            = "models/weapons/w_shot_xm1014.mdl"
+SWEP.ViewModel             = "models/weapons/cstrike/c_shot_m3super90.mdl"
+SWEP.WorldModel            = "models/weapons/w_shot_m3super90.mdl"
 
 SWEP.IronSightsPos         = Vector(-6.881, -9.214, 2.66)
 SWEP.IronSightsAng         = Vector(-0.101, -0.7, -0.201)
 
 SWEP.reloadtimer           = 0
+
+SWEP.CanBuy = { ROLE_TRAITOR, ROLE_DETECTIVE }
+SWEP.LimitedStock = true
+
+-- We were bought as special equipment, and we have an extra to give
+function SWEP:WasBought(buyer)
+   if IsValid(buyer) then -- probably already self.Owner
+      buyer:GiveAmmo( 6, "Buckshot" )
+   end
+end
 
 function SWEP:SetupDataTables()
    self:DTVar("Bool", 0, "reloading")

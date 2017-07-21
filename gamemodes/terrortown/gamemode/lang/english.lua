@@ -438,10 +438,8 @@ L.sipistol_desc   = [[
 Low-noise handgun, uses normal pistol
 ammo.
 
-Victims will not scream when killed.
-Special black-market technology means
-the further you are from your target,
-the more damage headshots do.]]
+Victims will not scream when killed. 
+Headshots deal more damage with distance.]]
 
 -- Newton launcher
 L.newton_name     = "Newton launcher"
@@ -450,6 +448,21 @@ L.newton_desc     = [[
 Push people from a safe distance.
 
 Infinite ammo, but slow to fire.]]
+
+-- Pump shotgun
+L.p90_name = "P90"
+
+L.p90_desc     = [[
+A special scoped SMG. It's accurate and a little more
+powerful but a bit slower than normal.
+
+Press MOUSE2 to use the scope.]]
+
+-- P90
+L.pumpshotgun_name = "Pump Shotgun"
+
+L.pumpshotgun_desc     = [[
+A more powerful but slower version of the shotgun.]]
 
 -- Binoculars
 L.binoc_name      = "Binoculars"
