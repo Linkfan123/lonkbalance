@@ -77,7 +77,7 @@ SWEP.IsSilent = false
 
 if CLIENT then
    SWEP.DrawCrosshair   = false
-   SWEP.ViewModelFOV    = 54
+   SWEP.ViewModelFOV    = 82
    SWEP.ViewModelFlip   = true
    SWEP.CSMuzzleFlashes = true
 end
