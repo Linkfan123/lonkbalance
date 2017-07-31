@@ -1111,8 +1111,8 @@ L.aw_bdlki2_text = "has seen everything but can't express it though, 'cause he t
 L.aw_bdlkt1_title = "Noobie Agent"
 L.aw_bdlkt1_text = "was trying to be all righteous trying to end terrorism. Well, it hasn't worked the past {num} times, soooooo..."
 
-L.aw_glk1.title = "FKIN GLOCKS"
-L.aw_glk1.text = "made Moe rage on Twitch when they killed {num} enemies with the water gun."
+L.aw_glk1_title = "FKIN GLOCKS"
+L.aw_glk1_text = "made Moe rage on Twitch when they killed {num} enemies with the water gun."
 
 L.aw_bdlkt2_title = "Le Worst Agent"
 L.aw_bdlkt2_text = "is conducting an experiment on if trying killing a bunch of terrorists stops terrorism and doesn't get himself hurt. After {num} trials we've come up with a pretty solid conclusion but he hasn't yet."
